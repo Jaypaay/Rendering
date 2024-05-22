@@ -20,7 +20,7 @@ int main()
 
     auto const rectangle_mesh = gl::Mesh{{
     .vertex_buffers = {{
-        .layout = {gl::VertexAttribute::Position2D{0}},
+        .layout = {gl::VertexAttribute::Position3D{0}},
         .data   = {
             -0.5f, -0.5f,
             0.5f, -0.5f,
