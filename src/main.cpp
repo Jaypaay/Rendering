@@ -46,6 +46,7 @@ int main()
         //shader.set_uniform("colorFade", glm::vec4{1.0f,1.0f,1.0f, ALPHAVALUE});
         rectangle_mesh.draw();
         glm::mat4 const view_matrix = camera.view_matrix();
+        //glm::mat4 const projection_matrix = glm::ortho(2.0f, 2.0f, 2.0f, 2.0f);
         glm::mat4 const projection_matrix = glm::infinitePerspective(1.f, gl::framebuffer_aspect_ratio(), 0.001f);
         shader.set_uniform("matrix", projection_matrix * view_matrix);
     }
