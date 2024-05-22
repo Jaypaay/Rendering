@@ -5,6 +5,11 @@ int main()
     gl::init("TPs de Rendering");
     gl::maximize_window();
 
+    auto const shader = gl::Shader{{
+    .vertex   = gl::ShaderSource::File{"res/vertex.glsl"},
+    .fragment = gl::ShaderSource::File{"res/fragment.glsl"},
+}};
+
     auto const rectangle_mesh = gl::Mesh{{
     .vertex_buffers = {{
         .layout = {gl::VertexAttribute::Position2D{0}},
@@ -25,7 +30,7 @@ int main()
     {
         glClearColor(0.f,0.f,1.f,1.f);
         glClear(GL_COLOR_BUFFER_BIT);
-        gl::bind_default_shader();
+        shader.bind();
         rectangle_mesh.draw();
     }
 }
