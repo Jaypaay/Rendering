@@ -31,6 +31,8 @@ int main()
         glClearColor(0.f,0.f,1.f,1.f);
         glClear(GL_COLOR_BUFFER_BIT);
         shader.bind();
+        shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());
+        shader.set_uniform("uniformValue", glm::vec2{1.f,3.f});
         rectangle_mesh.draw();
     }
 }
