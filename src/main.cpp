@@ -7,6 +7,7 @@ int main()
     gl::maximize_window(); // On peut la maximiser si on veut
     while (gl::window_is_open())
     {
-
+        glClearColor(0.f,0.f,1.f,1.f);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
 }
