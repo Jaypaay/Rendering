@@ -1,5 +1,6 @@
 #include "opengl-framework/opengl-framework.hpp"
 #include "glm/ext/matrix_clip_space.hpp"
+#include "glm/ext/matrix_transform.hpp"
 
 int main()
 {
@@ -44,10 +45,15 @@ int main()
 
         //TODO set fade
         //shader.set_uniform("colorFade", glm::vec4{1.0f,1.0f,1.0f, ALPHAVALUE});
+
         rectangle_mesh.draw();
         glm::mat4 const view_matrix = camera.view_matrix();
+        glm::mat4 const rotation = glm::rotate(glm::mat4{1.f}, gl::time_in_seconds(), glm::vec3{0.f, 0.f, 1.f});
+        glm::mat4 const translation = glm::translate(glm::mat4{1.f}, glm::vec3{0.f,1.f,0.f});
         //glm::mat4 const projection_matrix = glm::ortho(2.0f, 2.0f, 2.0f, 2.0f);
         glm::mat4 const projection_matrix = glm::infinitePerspective(1.f, gl::framebuffer_aspect_ratio(), 0.001f);
+        //Model matrix (rotation, translation)
+        //shader.set_uniform("matrix", rotation * translation * projection_matrix * view_matrix);
         shader.set_uniform("matrix", projection_matrix * view_matrix);
     }
 }
