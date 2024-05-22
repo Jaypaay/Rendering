@@ -22,10 +22,10 @@ int main()
     .vertex_buffers = {{
         .layout = {gl::VertexAttribute::Position3D{0}},
         .data   = {
-            -0.5f, -0.5f,
-            0.5f, -0.5f,
-            0.5f, 0.5f,
-            -0.5f, 0.5f
+            // REQUIRED TO PUT ALL DATA HERE FOR 3D POSITIONS
+
+
+
         },
     }},
     .index_buffer = {
