@@ -4,6 +4,9 @@ layout(location = 0) in vec2 in_position;
 uniform float aspect_ratio;
 uniform float movement;
 
+// 3D exercice
+uniform mat4 matrix;
+
 void main()
 {
     vec2 position = in_position;
@@ -14,5 +17,6 @@ void main()
     position.x = position.x / aspect_ratio;
     position.x += movement/10;
     
-    gl_Position = vec4(position , 0.0f ,1.0f);
+    gl_Position = matrix * vec4(position, 0., 1.);
+    //gl_Position = vec4(position , 0.0f ,1.0f);
 }

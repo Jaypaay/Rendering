@@ -1,9 +1,15 @@
 #include "opengl-framework/opengl-framework.hpp"
+#include "glm/ext/matrix_clip_space.hpp"
 
 int main()
 {
     gl::init("TPs de Rendering");
     gl::maximize_window();
+    // Camera
+    auto camera = gl::Camera{};
+    // Camera inputs
+    gl::set_events_callbacks({camera.events_callbacks()});
+    
     glEnable(GL_BLEND);
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE);
     auto const shader = gl::Shader{{
@@ -39,5 +45,8 @@ int main()
         //TODO set fade
         //shader.set_uniform("colorFade", glm::vec4{1.0f,1.0f,1.0f, ALPHAVALUE});
         rectangle_mesh.draw();
+        glm::mat4 const view_matrix = camera.view_matrix();
+        glm::mat4 const projection_matrix = glm::infinitePerspective(1.f, gl::framebuffer_aspect_ratio(), 0.001f);
+        shader.set_uniform("matrix", projection_matrix * view_matrix);
     }
 }
