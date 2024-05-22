@@ -1,6 +1,6 @@
 #version 410
 
-layout(location = 0) in vec2 in_position;
+layout(location = 0) in vec3 in_position;
 uniform float aspect_ratio;
 uniform float movement;
 
@@ -16,6 +16,7 @@ void main()
     //position.y = in_position.y + 0.4f;
     position.x = position.x / aspect_ratio;
     position.y = position.y / aspect_ratio;
+    position.z = position.z / aspect_ratio;
     //position.x += movement/10;
     
     gl_Position = matrix * vec4(position, 0., 1.);
