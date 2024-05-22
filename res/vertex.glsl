@@ -15,7 +15,7 @@ void main()
     //position.x = in_position.x + 0.4f;
     //position.y = in_position.y + 0.4f;
     position.x = position.x / aspect_ratio;
-    position.x += movement/10;
+    //position.x += movement/10;
     
     gl_Position = matrix * vec4(position, 0., 1.);
     //gl_Position = vec4(position , 0.0f ,1.0f);
