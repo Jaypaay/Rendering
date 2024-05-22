@@ -33,6 +33,7 @@ int main()
         shader.bind();
         shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());
         shader.set_uniform("uniformValue", glm::vec2{1.f,3.f});
+        shader.set_uniform("movement", gl::time_in_seconds());
         rectangle_mesh.draw();
     }
 }
