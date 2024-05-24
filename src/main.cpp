@@ -32,19 +32,44 @@ int main()
         }
     };
 
+    auto render_target = gl::RenderTarget{gl::RenderTarget_Descriptor{
+    .width          = gl::framebuffer_width_in_pixels(),
+    .height         = gl::framebuffer_height_in_pixels(),
+    .color_textures = {
+        gl::ColorAttachment_Descriptor{
+            .format  = gl::InternalFormat_Color::RGBA8,
+            .options = {
+                .minification_filter  = gl::Filter::NearestNeighbour, // On va toujours afficher la texture à la taille de l'écran,
+                .magnification_filter = gl::Filter::NearestNeighbour, // donc les filtres n'auront pas d'effet. Tant qu'à faire on choisit le moins coûteux.
+                .wrap_x               = gl::Wrap::ClampToEdge,
+                .wrap_y               = gl::Wrap::ClampToEdge,
+            },
+        },
+    },
+    .depth_stencil_texture = gl::DepthStencilAttachment_Descriptor{
+        .format  = gl::InternalFormat_DepthStencil::Depth32F,
+        .options = {
+            .minification_filter  = gl::Filter::NearestNeighbour,
+            .magnification_filter = gl::Filter::NearestNeighbour,
+            .wrap_x               = gl::Wrap::ClampToEdge,
+            .wrap_y               = gl::Wrap::ClampToEdge,
+        },
+    },
+}};
+
     auto const rectangle_mesh = gl::Mesh{{
     .vertex_buffers = {{
         .layout = {gl::VertexAttribute::Position3D{0}, gl::VertexAttribute::UV{1}},
         .data   = {
             // REQUIRED TO PUT ALL DATA HERE FOR 3D POSITIONS
-                -0.5f, -0.5f, -0.5f, 0, -1,
-                0.5f, -0.5f, -0.5f, 1, -1,
-                0.5f,  0.5f, -0.5f, 1, 2,
-                -0.5f,  0.5f, -0.5f, 0, 2,
-                -0.5f, -0.5f,  0.5f, 0, -1,
-                0.5f, -0.5f,  0.5f, 1, -1,
-                0.5f,  0.5f,  0.5f, 1, 2,
-                -0.5f,  0.5f,  0.5f,  0, 2
+                -0.5f, -0.5f, -0.5f, 0, 0,
+                0.5f, -0.5f, -0.5f, 1, 0,
+                0.5f,  0.5f, -0.5f, 1, 1,
+                -0.5f,  0.5f, -0.5f, 0, 1,
+                -0.5f, -0.5f,  0.5f, 0, 0,
+                0.5f, -0.5f,  0.5f, 1, 0,
+                0.5f,  0.5f,  0.5f, 1, 1,
+                -0.5f,  0.5f,  0.5f,  0, 1
         },
     }},
     .index_buffer = {
