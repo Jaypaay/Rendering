@@ -8,8 +8,6 @@ int main()
     gl::maximize_window();
     // Camera
     auto camera = gl::Camera{};
-    // Camera inputs
-    gl::set_events_callbacks({camera.events_callbacks()});
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE);
@@ -56,6 +54,14 @@ int main()
         },
     },
 }};
+
+    // Camera & Render target callbacks
+    gl::set_events_callbacks({
+    camera.events_callbacks(),
+    {.on_framebuffer_resized = [&](gl::FramebufferResizedEvent const& e) {
+        render_target.resize(e.width_in_pixels, e.height_in_pixels);
+    }},
+});
 
     auto const rectangle_mesh = gl::Mesh{{
     .vertex_buffers = {{
