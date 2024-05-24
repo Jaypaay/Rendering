@@ -6,10 +6,12 @@ uniform float movement;
 
 // 3D exercice
 uniform mat4 matrix;
+out vec3 vertex_position;
 
 void main()
 {
-    vec2 position = in_position;
+    vec3 position = in_position;
+    vertex_position = in_position;
 
     // Was used to add an offset to the rectangle
     //position.x = in_position.x + 0.4f;
@@ -19,6 +21,6 @@ void main()
     position.z = position.z / aspect_ratio;
     //position.x += movement/10;
     
-    gl_Position = matrix * vec4(position, 0., 1.);
+    gl_Position = matrix * vec4(position, 1.);
     //gl_Position = vec4(position , 0.0f ,1.0f);
 }

@@ -23,14 +23,23 @@ int main()
         .layout = {gl::VertexAttribute::Position3D{0}},
         .data   = {
             // REQUIRED TO PUT ALL DATA HERE FOR 3D POSITIONS
-
-
-
+                -0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f,  0.5f, -0.5f,
+                -0.5f,  0.5f, -0.5f,
+                -0.5f, -0.5f,  0.5f,
+                0.5f, -0.5f,  0.5f,
+                0.5f,  0.5f,  0.5f,
+                -0.5f,  0.5f,  0.5f
         },
     }},
     .index_buffer = {
-        0,1,2,
-        0,2,3
+        0, 1, 2, 2, 3, 0,
+        4, 5, 6, 6, 7, 4,
+        0, 3, 7, 7, 4, 0,
+        1, 5, 6, 6, 2, 1,
+        0, 1, 5, 5, 4, 0,
+        3, 2, 6, 6, 7, 3
     }
 }};
 
