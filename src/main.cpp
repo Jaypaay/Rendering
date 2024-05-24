@@ -10,7 +10,7 @@ int main()
     auto camera = gl::Camera{};
     // Camera inputs
     gl::set_events_callbacks({camera.events_callbacks()});
-    
+    glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE);
     auto const shader = gl::Shader{{
@@ -46,7 +46,7 @@ int main()
     while (gl::window_is_open())
     {
         glClearColor(0.f,0.f,1.f,1.f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);     
         shader.bind();
         shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());
         shader.set_uniform("uniformValue", glm::vec2{1.f,3.f});
