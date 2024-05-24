@@ -90,6 +90,11 @@ int main()
 
     while (gl::window_is_open())
     {
+         render_target.render([&]() {
+    glClearColor(1.f, 0.f, 0.f, 1.f); // Dessine du rouge, non pas à l'écran, mais sur notre render target
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // ... mettez tout votre code de rendu ici
+
         glClearColor(0.f,0.f,1.f,1.f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);     
         shader.bind();
@@ -109,5 +114,6 @@ int main()
         //Model matrix (rotation, translation)
         //shader.set_uniform("matrix", rotation * translation * projection_matrix * view_matrix);
         shader.set_uniform("matrix", projection_matrix * view_matrix);
+        });
     }
 }
