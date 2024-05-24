@@ -20,17 +20,17 @@ int main()
 
     auto const rectangle_mesh = gl::Mesh{{
     .vertex_buffers = {{
-        .layout = {gl::VertexAttribute::Position3D{0}},
+        .layout = {gl::VertexAttribute::Position3D{0}, gl::VertexAttribute::UV{1}},
         .data   = {
             // REQUIRED TO PUT ALL DATA HERE FOR 3D POSITIONS
-                -0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                0.5f,  0.5f, -0.5f,
-                -0.5f,  0.5f, -0.5f,
-                -0.5f, -0.5f,  0.5f,
-                0.5f, -0.5f,  0.5f,
-                0.5f,  0.5f,  0.5f,
-                -0.5f,  0.5f,  0.5f
+                -0.5f, -0.5f, -0.5f, 0, 0,
+                0.5f, -0.5f, -0.5f, 1, 0,
+                0.5f,  0.5f, -0.5f, 1, 1,
+                -0.5f,  0.5f, -0.5f, 0, 1,
+                -0.5f, -0.5f,  0.5f, 0, 0,
+                0.5f, -0.5f,  0.5f, 1, 0,
+                0.5f,  0.5f,  0.5f, 1, 1,
+                -0.5f,  0.5f,  0.5f,  0, 1
         },
     }},
     .index_buffer = {
@@ -51,7 +51,6 @@ int main()
         shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());
         shader.set_uniform("uniformValue", glm::vec2{1.f,3.f});
         shader.set_uniform("movement", gl::time_in_seconds());
-
         //TODO set fade
         //shader.set_uniform("colorFade", glm::vec4{1.0f,1.0f,1.0f, ALPHAVALUE});
 
