@@ -37,14 +37,14 @@ int main()
         .layout = {gl::VertexAttribute::Position3D{0}, gl::VertexAttribute::UV{1}},
         .data   = {
             // REQUIRED TO PUT ALL DATA HERE FOR 3D POSITIONS
-                -0.5f, -0.5f, -0.5f, 0, 0,
-                0.5f, -0.5f, -0.5f, 1, 0,
-                0.5f,  0.5f, -0.5f, 1, 1,
-                -0.5f,  0.5f, -0.5f, 0, 1,
-                -0.5f, -0.5f,  0.5f, 0, 0,
-                0.5f, -0.5f,  0.5f, 1, 0,
-                0.5f,  0.5f,  0.5f, 1, 1,
-                -0.5f,  0.5f,  0.5f,  0, 1
+                -0.5f, -0.5f, -0.5f, 0, -1,
+                0.5f, -0.5f, -0.5f, 1, -1,
+                0.5f,  0.5f, -0.5f, 1, 2,
+                -0.5f,  0.5f, -0.5f, 0, 2,
+                -0.5f, -0.5f,  0.5f, 0, -1,
+                0.5f, -0.5f,  0.5f, 1, -1,
+                0.5f,  0.5f,  0.5f, 1, 2,
+                -0.5f,  0.5f,  0.5f,  0, 2
         },
     }},
     .index_buffer = {
