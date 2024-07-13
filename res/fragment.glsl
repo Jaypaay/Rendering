@@ -9,9 +9,9 @@ void main()
 {
     //Texture
     vec4 texture_color = texture(sampler, uv);
-    out_color = vec4(texture_color.x, texture_color.y, 0., 1.);
+    //out_color = vec4(texture_color.x, texture_color.y, 0., 1.);
     //UV
-    //out_color = vec4(uv.x, uv.y, 0., 1.);
+    out_color = vec4(uv.x, uv.y, 0., 1.);
     
     //out_color = vec4(vertex_position, 1.);
     //out_color = vec4(0.84, 0.23, 0.23, 1.0);

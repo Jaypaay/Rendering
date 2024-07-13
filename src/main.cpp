@@ -34,8 +34,7 @@ auto load_mesh(std::filesystem::path const& path) -> gl::Mesh
     //Return mesh here
     return gl::Mesh{{
     .vertex_buffers = {{
-        .layout = {gl::VertexAttribute::Position3D{0}, gl::VertexAttribute::Normal3D{2} ,gl::VertexAttribute::UV{1}},
-        .data = vertices
+        .layout = {gl::VertexAttribute::Position3D{0}, gl::VertexAttribute::Normal3D{2} ,gl::VertexAttribute::UV{1}}, .data = vertices
     }}
 }};
 }
