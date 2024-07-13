@@ -2,6 +2,7 @@
 
 layout(location = 0) in vec3 in_position;
 layout(location = 1) in vec2 in_uv;
+layout(location = 2) in vec3 in_normals;
 uniform float aspect_ratio;
 uniform float movement;
 
@@ -9,10 +10,12 @@ uniform float movement;
 uniform mat4 matrix;
 out vec3 vertex_position;
 out vec2 uv;
+out vec3 normals;
 
 void main()
 {
     uv = in_uv;
+    normals = in_normals;
     vec3 position = in_position;
     vertex_position = in_position;
     // Was used to add an offset to the rectangle
