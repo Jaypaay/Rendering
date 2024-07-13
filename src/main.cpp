@@ -133,7 +133,7 @@ int main()
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // ... mettez tout votre code de rendu ici
 
-        glClearColor(0.f,0.f,1.f,1.f);
+        glClearColor(0.55f,0.56f,0.56f,1.f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);     
         shader.bind();
         shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());

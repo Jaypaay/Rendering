@@ -11,7 +11,7 @@ void main()
 {
     //Light intensity
     vec4 texture_color = texture(sampler, uv);
-    float intensity = dot(normalize(normals), normalize(light_direction));
+    float intensity = dot(normalize(normals), normalize(light_direction)) + 0.3;
     out_color = texture_color * -intensity;
     //Utilisé avant pour afficher lesnormals du bateau
     //out_color = vec4(normals, 1);
