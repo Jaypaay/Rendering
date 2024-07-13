@@ -9,9 +9,12 @@ in vec3 normals;
 
 void main()
 {
-    //Texture
+    //Light intensity
     vec4 texture_color = texture(sampler, uv);
-    out_color = vec4(normals, 1);
+    float intensity = dot(normalize(normals), normalize(light_direction));
+    out_color = texture_color * -intensity;
+    //Utilisé avant pour afficher lesnormals du bateau
+    //out_color = vec4(normals, 1);
     //out_color = vec4(texture_color.x, texture_color.y, 0., 1.);
     //UV
     
