@@ -1,6 +1,45 @@
 #include "opengl-framework/opengl-framework.hpp"
 #include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
+#include "tiny_obj_loader.h"
+
+
+auto load_mesh(std::filesystem::path const& path) -> gl::Mesh
+{
+    // On lit le fichier avec tinyobj
+    auto reader = tinyobj::ObjReader{};
+    reader.ParseFromFile(gl::make_absolute_path(path).string(), {});
+
+    // On met tous les attributs dans un tableau
+    auto vertices = std::vector<float>{};
+    for (auto const& shape : reader.GetShapes())
+    {
+        for (auto const& idx : shape.mesh.indices)
+        {
+            // Position
+            vertices.push_back(reader.GetAttrib().vertices[3 * idx.vertex_index + 0]);
+            vertices.push_back(reader.GetAttrib().vertices[3 * idx.vertex_index + 1]);
+            vertices.push_back(reader.GetAttrib().vertices[3 * idx.vertex_index + 2]);
+
+            // UV
+            vertices.push_back(reader.GetAttrib().texcoords[2 * idx.texcoord_index + 0]);
+            vertices.push_back(reader.GetAttrib().texcoords[2 * idx.texcoord_index + 1]);
+
+            // Normale
+            vertices.push_back(reader.GetAttrib().normals[3 * idx.normal_index + 0]);
+            vertices.push_back(reader.GetAttrib().normals[3 * idx.normal_index + 1]);
+            vertices.push_back(reader.GetAttrib().normals[3 * idx.normal_index + 2]);
+        };
+    }
+    //Return mesh here
+    return gl::Mesh{{
+    .vertex_buffers = {{
+        .layout = {gl::VertexAttribute::Position3D{0}, gl::VertexAttribute::Normal3D{2} ,gl::VertexAttribute::UV{1}},
+        .data = vertices
+    }}
+}};
+}
+
 
 int main()
 {
@@ -90,9 +129,9 @@ int main()
 
     while (gl::window_is_open())
     {
-         render_target.render([&]() {
-    glClearColor(1.f, 0.f, 0.f, 1.f); // Dessine du rouge, non pas à l'écran, mais sur notre render target
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //render_target.render([&]() {
+    //glClearColor(1.f, 0.f, 0.f, 1.f); // Dessine du rouge, non pas à l'écran, mais sur notre render target
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // ... mettez tout votre code de rendu ici
 
         glClearColor(0.f,0.f,1.f,1.f);
@@ -105,7 +144,8 @@ int main()
         //TODO set fade
         //shader.set_uniform("colorFade", glm::vec4{1.0f,1.0f,1.0f, ALPHAVALUE});
 
-        rectangle_mesh.draw();
+        auto const boat = load_mesh("res/fourareen.obj");
+        boat.draw();
         glm::mat4 const view_matrix = camera.view_matrix();
         glm::mat4 const rotation = glm::rotate(glm::mat4{1.f}, gl::time_in_seconds(), glm::vec3{0.f, 0.f, 1.f});
         glm::mat4 const translation = glm::translate(glm::mat4{1.f}, glm::vec3{0.f,1.f,0.f});
@@ -114,6 +154,6 @@ int main()
         //Model matrix (rotation, translation)
         //shader.set_uniform("matrix", rotation * translation * projection_matrix * view_matrix);
         shader.set_uniform("matrix", projection_matrix * view_matrix);
-        });
+        //});
     }
 }
