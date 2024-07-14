@@ -141,6 +141,8 @@ int main()
         shader.set_uniform("movement", gl::time_in_seconds());
         shader.set_uniform("sampler", texture);
         shader.set_uniform("light_direction", glm::vec3(0.2, 0.3, -1));
+        shader.set_uniform("point_light_position", glm::vec3(0.2, 0.3, -1));
+    
         //TODO set fade
         //shader.set_uniform("colorFade", glm::vec4{1.0f,1.0f,1.0f, ALPHAVALUE});
 
